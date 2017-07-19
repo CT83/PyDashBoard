@@ -1,2 +1,10 @@
+from GUI.EmptyMainWindow import createEmptyMainWindow
+
+
 def generateTests():
-    print ("Generating Tests")
+    print ("Adding Tests")
+
+
+def drawMainWindow():
+    print ("Drawing MainWindow")
+    createEmptyMainWindow()
