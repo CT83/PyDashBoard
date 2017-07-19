@@ -3,3 +3,10 @@ This is a Python application to convert the inputs given by TCP/IP Protcol to pr
 
 Vision:
 A TCP connection will be added to a Raspberry Pi via an Ethernet cable this will transmit the signals to the Raspberry in form of Simple CVS String. PyDashBoard will then parse this string and convert into a humanly readable format and display it Elegantly on the screen.
+
+Libraries Used:
+PySide
+PyQt4
+
+Tools Used:
+QtDesigner 
