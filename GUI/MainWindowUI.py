@@ -247,3 +247,10 @@ class Ui_MainWindow(object):
         self.StartButton.setText(_translate("MainWindow", "Start", None))
         # self.TestName.setText(_translate("MainWindow", "Test Name", None))
         self.resultLabel.setText(_translate("MainWindow", "Result", None))
+
+
+class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
+    def __init__(self, parent=None, f=QtCore.Qt.WindowFlags()):
+        QtGui.QMainWindow.__init__(self, parent, f)
+
+        self.setupUi(self)
