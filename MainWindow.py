@@ -1,6 +1,8 @@
+from CommonMethods.CommonMethods import display
 from CommonVariables.GlobalConstants import application_name
-from GUI.PyGenerators import drawMainWindow
+from GUI.PyGenerators import drawMainWindow, generateNewTest
 
-print (application_name + " Initialised...")
-print ("Generating UI...")
+display(application_name + " Initialised...")
+display("Generating UI...")
 drawMainWindow()
+generateNewTest()
