@@ -13,13 +13,14 @@ ui.setupUi(MainWindow)
 
 def generate_new_test(test_self):
     print ("Adding Tests:" + test_self.test_name)
-    generate_poles(test_self)
     ui.addNewTest(test_self.test_name)
     MainWindow.show()
 
 
 def generate_poles(test_self):
     display("Generating Poles respectively for:" + test_self.pole_list_list)
+    ui.addNewPole(test_self)
+    MainWindow.show()
 
 
 def drawMainWindow():

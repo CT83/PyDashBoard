@@ -23,12 +23,35 @@ except AttributeError:
 
 
 class Ui_MainWindow(object):
+    def addNewPole(self, test_self):
+        self.individualPole = QtGui.QVBoxLayout()
+        self.individualPole.setObjectName(_fromUtf8("individualPole"))
+
+        self.pole_label = QtGui.QLabel(self.verticalLayoutWidget_2)
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setBold(False)
+        font.setWeight(50)
+        self.pole_label.setFont(font)
+        self.pole_label.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.pole_label.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.pole_label.setAutoFillBackground(True)
+        self.pole_label.setObjectName(_fromUtf8("pole_label"))
+        self.pole_label.setText(_translate("MainWindow", test_self.test_name, None))
+        self.individualPole.addWidget(self.pole_label)
+
+        spacerItem = QtGui.QSpacerItem(20, 35, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+
+        self.individualPole.addItem(spacerItem)
+
+        self.PolesVerticalLayout.addLayout(self.individualPole)
+
     def addNewTest(self, test_name):
         display("Calling addNewTest...")
-        self.PolesVerticalLayout = QtGui.QVBoxLayout()
-        self.PolesVerticalLayout.setSpacing(0)
-        self.PolesVerticalLayout.setObjectName(_fromUtf8("PolesVerticalLayout"))
-        self.TestName = QtGui.QLabel(self.widget)
+        self.TestVerticalLayout = QtGui.QVBoxLayout()
+        self.TestVerticalLayout.setSpacing(0)
+        self.TestVerticalLayout.setObjectName(_fromUtf8("TestVerticalLayout"))
+        self.TestName = QtGui.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(14)
         self.TestName.setFont(font)
@@ -39,15 +62,29 @@ class Ui_MainWindow(object):
                                               "color:white;\n"
                                               "}"))
         self.TestName.setObjectName(_fromUtf8("TestName"))
-        self.PolesVerticalLayout.addWidget(self.TestName)
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.PolesVerticalLayout.addItem(spacerItem)
+        self.TestVerticalLayout.addWidget(self.TestName)
+        spacerItem = QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.TestVerticalLayout.addItem(spacerItem)
+        self.resultLabel = QtGui.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.resultLabel.setFont(font)
+        self.resultLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.resultLabel.setStyleSheet(_fromUtf8("QLabel {\n"
+                                                 "qproperty-alignment: AlignCenter;\n"
+                                                 "color:white;\n"
+                                                 "}"))
+        self.resultLabel.setObjectName(_fromUtf8("resultLabel"))
+        self.TestVerticalLayout.addWidget(self.resultLabel)
+
         self.TestName.setText(_translate("MainWindow", test_name, None))
-        self.TestsHorizontalLayout.addLayout(self.PolesVerticalLayout)
+        self.TestsHorizontalLayout.addLayout(self.TestVerticalLayout)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(836, 480)
+        MainWindow.resize(843, 480)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -201,14 +238,36 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         MainWindow.setAutoFillBackground(True)
         MainWindow.setAnimated(False)
-
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setAutoFillBackground(True)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+
+        self.verticalLayoutWidget_2 = QtGui.QWidget(self.centralwidget)
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(60, 30, 166, 406))
+        self.verticalLayoutWidget_2.setObjectName(_fromUtf8("verticalLayoutWidget_2"))
+
+        self.gridLayout = QtGui.QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
+        self.PolesVerticalLayout = QtGui.QVBoxLayout()
+        self.PolesVerticalLayout.setObjectName(_fromUtf8("PolesVerticalLayout"))
+
+        spacerItem1 = QtGui.QSpacerItem(23, 30, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Preferred)
+        self.PolesVerticalLayout.addItem(spacerItem1)
+
+        self.gridLayout.addLayout(self.PolesVerticalLayout, 0, 0, 1, 1)
+        self.TestParentLayout = QtGui.QVBoxLayout()
+        self.TestParentLayout.setObjectName(_fromUtf8("TestParentLayout"))
+        self.TestsHorizontalLayout = QtGui.QHBoxLayout()
+        self.TestsHorizontalLayout.setObjectName(_fromUtf8("TestsHorizontalLayout"))
+        self.TestParentLayout.addLayout(self.TestsHorizontalLayout)
+        self.gridLayout.addLayout(self.TestParentLayout, 0, 1, 1, 1)
+
         self.StartButton = QtGui.QPushButton(self.centralwidget)
-        self.StartButton.setGeometry(QtCore.QRect(40, 440, 131, 28))
+        self.StartButton.setMaximumSize(QtCore.QSize(90, 16777215))
         font = QtGui.QFont()
         font.setPointSize(18)
+        font.setBold(False)
+        font.setWeight(50)
         self.StartButton.setFont(font)
         self.StartButton.setAcceptDrops(True)
         self.StartButton.setStyleSheet(_fromUtf8("QPushButton{\n"
@@ -217,36 +276,15 @@ class Ui_MainWindow(object):
                                                  "}"))
         self.StartButton.setFlat(False)
         self.StartButton.setObjectName(_fromUtf8("StartButton"))
-        self.widget = QtGui.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(120, 20, 641, 411))
-        self.widget.setObjectName(_fromUtf8("widget"))
-
-        self.TestParentLayout = QtGui.QVBoxLayout(self.widget)
-        self.TestParentLayout.setObjectName(_fromUtf8("TestParentLayout"))
-        self.TestsHorizontalLayout = QtGui.QHBoxLayout()
-        self.TestsHorizontalLayout.setObjectName(_fromUtf8("TestsHorizontalLayout"))
-
-        self.TestParentLayout.addLayout(self.TestsHorizontalLayout)
-
-        self.resultLabel = QtGui.QLabel(self.widget)
-        self.resultLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.resultLabel.setStyleSheet(_fromUtf8("QLabel {\n"
-                                                 "qproperty-alignment: AlignCenter;\n"
-                                                 "color:white;\n"
-                                                 "}"))
-        self.resultLabel.setObjectName(_fromUtf8("resultLabel"))
-        self.TestParentLayout.addWidget(self.resultLabel)
+        self.gridLayout.addWidget(self.StartButton, 1, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.StartButton.setText(_translate("MainWindow", "Start", None))
-        # self.TestName.setText(_translate("MainWindow", "Test Name", None))
-        self.resultLabel.setText(_translate("MainWindow", "Result", None))
 
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
