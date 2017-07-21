@@ -4,8 +4,9 @@ This is a Python application to convert the inputs given by TCP/IP Protcol to pr
 Vision:
 A TCP connection will be added to a Raspberry Pi via an Ethernet cable this will transmit the signals to the Raspberry in form of Simple CVS String. PyDashBoard will then parse this string and convert into a humanly readable format and display it Elegantly on the screen.
 
-Dependencies:
-First install PySide on Raspberry Pi. by "sudo apt-get install python-pyside"
+Deployment:
+1."$sudo apt-get install python-pyside"
+2.Clone this Repo and Run the MainWindow.py File
 
 How to Install?
 1.Clone the Repository
@@ -16,7 +17,7 @@ How to Install?
 
 Libraries Used:
 PySide
-PyQt4
+
 
 Tools Used:
 QtDesigner 
