@@ -3,6 +3,7 @@
 # pole_list[pole number]=[current,time,individual_result]
 
 
+
 class Test:
     def __init__(self, test_name, pole_list_list, continuous, final_result):
         self.test_name = test_name

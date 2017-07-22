@@ -1,9 +1,9 @@
 import sys
 
+from GUI.MainWindowUI import Ui_MainWindow
 from PySide import QtGui
 
-from CommonMethods.CommonMethods import display
-from GUI.MainWindowUI import Ui_MainWindow
+from Commons.Methods import display
 
 ui = Ui_MainWindow()
 app = QtGui.QApplication(sys.argv)
@@ -17,9 +17,9 @@ def generate_new_test(test_self):
     MainWindow.show()
 
 
-def generate_poles(test_self):
-    display("Generating Poles respectively for:" + test_self.pole_list_list)
-    ui.addNewPole(test_self)
+def generate_poles(test_self, index):
+    display("Generating Poles respectively for:" + str(test_self.pole_list_list))
+    ui.addNewPole(test_self, index)
     MainWindow.show()
 
 

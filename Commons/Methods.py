@@ -1,2 +1,2 @@
 def display(s):
-    print s
+    print(s)
