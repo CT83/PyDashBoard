@@ -9,7 +9,9 @@ MAX_POLE_SIZE = 100
 thermalTestName = "Thermal"
 thermalPoles = ["Current1", "Trip", "Time"], \
                ["Current2", "Trip", "Time"], \
+               ["Current2", "Trip", "Time"], \
                ["Current3", "Trip", "Time"]
+
 thermalFinalResult = "False"
 thermalContinuous = True
 
@@ -22,13 +24,13 @@ magneticFinalResult = "False"
 magneticContinuous = "False"
 
 # Test Test
-TestTestName = "Test"
+TestTestName = "Electrical"
 TestPoles = "Current", "Trip", "Time"
 TestFinalResult = "False"
 TestContinuous = "False"
 
 # Test Test
-Test2TestName = "Test2"
+Test2TestName = "Sample"
 Test2Poles = ["Current", "Trip", "Time"], \
              ["Current", "Trip", "Time"], \
              ["Current", "Trip", "Time"]
@@ -38,3 +40,5 @@ Test2Continuous = "False"
 CURRENT = 0
 TIME = 1
 IRESULT = 2
+
+ITEMS_EXCEPT_POLES = 1

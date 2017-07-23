@@ -1,19 +1,20 @@
 import sys
 
-from GUI.MainWindowUI import Ui_MainWindow
 from PySide import QtGui
 
 from Commons.Methods import display
+from GUI.MainWindowUI import UIMainWindow
 
-ui = Ui_MainWindow()
+ui = UIMainWindow()
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui.setupUi(MainWindow)
+display("Setting up Main Window")
 
 
 def generate_new_test(test_self):
     print ("Adding Tests:" + test_self.test_name)
-    ui.addNewTest(test_self.test_name)
+    ui.addNewTest(test_self)
     MainWindow.show()
 
 
