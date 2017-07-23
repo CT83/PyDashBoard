@@ -6,29 +6,28 @@ display(application_name + " Initialised...")
 display("Generating UI...")
 
 magneticTest = Test(magneticTestName, magneticPoles, magneticContinuous, magneticFinalResult)
-generate_new_test(magneticTest)
-
+# Poles which appear on the left panel
 thermalTest = Test(thermalTestName, thermalPoles, thermalContinuous, thermalFinalResult)
+testTest = Test(TestTestName, TestPoles, TestContinuous, TestFinalResult)
+test2Test = Test(Test2TestName, Test2Poles, Test2Continuous, Test2FinalResult)
+
+for i in xrange(NUMBER_OF_POLES):
+    generate_poles(thermalTest, i)
 generate_new_test(thermalTest)
-
-testTest = Test(TestTestName, TestPoles, TestContinuous,
-                TestFinalResult)
+generate_new_test(magneticTest)
 generate_new_test(testTest)
-
-test2Test = Test(Test2TestName, Test2Poles, Test2Continuous,
-                 Test2FinalResult)
 generate_new_test(test2Test)
 
-# Poles which appear on the left panel
-generate_poles(thermalTest, 0)
-generate_poles(magneticTest, 1)
-generate_poles(testTest, 2)
-generate_poles(test2Test, 3)
+
 # generate_poles(thermalTest,3)
 # generate_poles(thermalTest,4)
 
 print("Number of Poles=" + str(ui.PolesVerticalLayout.count() - ITEMS_EXCEPT_POLES))
 # print("Pole"+str(ui.PolesVerticalLayout)
 
-ui.ip_3[3][4].setText("Globally Manipulated")
+ui.top_PoleTestLegend[3][3].setText("Globally Manipulated")
+ui.top_PoleTestLegend[0][0].setText("Globally Manipulated")
+ui.top_PoleTest_T0[0][0].setText("T0")
+ui.top_PoleTest_T1[0][0].setText("T1")
+ui.top_PoleTest_T2[0][0].setText("T2")
 drawMainWindow()
