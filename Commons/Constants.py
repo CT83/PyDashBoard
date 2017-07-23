@@ -3,7 +3,7 @@ application_developer = "Rohan Sawant"
 application_version_type = "Alpha"
 application_version_num = "0.0.1"
 
-MAX_POLE_SIZE = 100
+MAX_SIZE = 10
 
 # Thermal Test
 thermalTestName = "Thermal"
@@ -17,23 +17,28 @@ thermalContinuous = True
 
 # Magnetic Test
 magneticTestName = "Magnetic"
-magneticPoles = ["Current", "Trip", "Time"], \
-                ["Current", "Trip", "Time"], \
-                ["Current", "Trip", "Time"]
+magneticPoles = ["Current1", "Trip", "Time"], \
+                ["Current2", "Trip", "Time"], \
+                ["Current2", "Trip", "Time"], \
+                ["Current3", "Trip", "Time"]
 magneticFinalResult = "False"
 magneticContinuous = "False"
 
 # Test Test
 TestTestName = "Electrical"
-TestPoles = "Current", "Trip", "Time"
+TestPoles = ["Current1", "Trip", "Time"], \
+            ["Current2", "Trip", "Time"], \
+            ["Current2", "Trip", "Time"], \
+            ["Current3", "Trip", "Time"]
 TestFinalResult = "False"
 TestContinuous = "False"
 
 # Test Test
 Test2TestName = "Sample"
-Test2Poles = ["Current", "Trip", "Time"], \
-             ["Current", "Trip", "Time"], \
-             ["Current", "Trip", "Time"]
+Test2Poles = ["Current1", "Trip", "Time"], \
+             ["Current2", "Trip", "Time"], \
+             ["Current2", "Trip", "Time"], \
+             ["Current3", "Trip", "Time"]
 Test2FinalResult = "False"
 Test2Continuous = "False"
 

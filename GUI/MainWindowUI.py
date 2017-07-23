@@ -4,6 +4,7 @@
 from PySide import QtCore, QtGui
 
 # noinspection PyUnresolvedReferences
+from Commons.Constants import MAX_SIZE
 from Commons.Methods import *
 
 try:
@@ -22,23 +23,30 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+l = 0
+
 
 class UIMainWindow(object):
-    def addNewTestPole(self, test_self, index):
+    def definitions(self):
+        self.ip_3 = [[QtGui.QLabel(self.centralwidget) for i in range(MAX_SIZE - 2)] for j in range(MAX_SIZE)]
+
+    def addNewTestPole(self, test_self, idx, idx2):
+        index = int(idx2)
         self.individualTestPerPole = QtGui.QVBoxLayout()
         self.individualTestPerPole.setObjectName(_fromUtf8("individualTestPerPole"))
 
-        self.ip_3 = QtGui.QLabel(self.centralwidget)
+        # self.ip_3[index] = QtGui.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.ip_3.setFont(font)
-        self.ip_3.setStyleSheet(_fromUtf8("QLabel {\n"
-                                          "qproperty-alignment: AlignCenter;\n"
-                                          "color:white;\n"
-                                          "}\n"
-                                          ""))
-        self.ip_3.setObjectName(_fromUtf8("ip_3"))
-        self.individualTestPerPole.addWidget(self.ip_3)
+        print str(idx) + " " + str(index)
+        self.ip_3[idx][index].setFont(font)
+        self.ip_3[idx][index].setStyleSheet(_fromUtf8("QLabel {\n"
+                                                      "qproperty-alignment: AlignCenter;\n"
+                                                      "color:white;\n"
+                                                      "}\n"
+                                                      ""))
+        self.ip_3[idx][index].setObjectName(_fromUtf8("ip_3"))
+        self.individualTestPerPole.addWidget(self.ip_3[idx][index])
 
         self.ip_2 = QtGui.QLabel(self.centralwidget)
         font = QtGui.QFont()
@@ -85,7 +93,8 @@ class UIMainWindow(object):
         self.individualTestPerPole.addWidget(self.ip_lineBottom)
         self.TestVerticalLayout.addLayout(self.individualTestPerPole)
 
-        self.ip_3.setText(_translate("MainWindow", str(index), None))
+        self.ip_3[idx][index].setText(str(index))
+        print "title :" + str(index)
 
         self.ip_2.setText(_translate("MainWindow", "PASS", None))
         self.ip_2.setStyleSheet("QLabel { background-color : green; color : white; qproperty-alignment: AlignCenter;}");
@@ -172,25 +181,12 @@ class UIMainWindow(object):
         self.pole_label_4.setText(_translate("MainWindow", test_self.pole_list_list[index][2], None))
 
     def addNewTest(self, test_self):
+        global l
+        l = l + 1
         display("Calling addNewTest...")
         self.TestVerticalLayout = QtGui.QVBoxLayout()
         self.TestVerticalLayout.setSpacing(0)
         self.TestVerticalLayout.setObjectName(_fromUtf8("TestVerticalLayout"))
-        """
-        self.TestName = QtGui.QLabel(self.centralwidget)
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.TestName.setFont(font)
-        self.TestName.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.TestName.setAutoFillBackground(False)
-        self.TestName.setStyleSheet(_fromUtf8("QLabel {\n"
-                                              "qproperty-alignment: AlignCenter;\n"
-                                              "color:white;\n"
-                                              "}"))
-        self.TestName.setObjectName(_fromUtf8("TestName"))
-        self.TestVerticalLayout.addWidget(self.TestName)
-        """
-
         self.test_nameLabel = QtGui.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -210,11 +206,10 @@ class UIMainWindow(object):
         self.TestVerticalLayout.addWidget(self.ip_lineTop)
 
         # Add new TestPoles Here.
-        self.addNewTestPole(test_self, test_self.test_name)
-
-        self.addNewTestPole(test_self, 2)
-        self.addNewTestPole(test_self, 3)
-        self.addNewTestPole(test_self, 4)
+        self.addNewTestPole(test_self, 1, l)
+        self.addNewTestPole(test_self, 2, l)
+        self.addNewTestPole(test_self, 3, l)
+        self.addNewTestPole(test_self, 4, l)
 
         # spacerItem = QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         # self.TestVerticalLayout.addItem(spacerItem)

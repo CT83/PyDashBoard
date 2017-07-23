@@ -9,6 +9,7 @@ ui = UIMainWindow()
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui.setupUi(MainWindow)
+ui.definitions()
 display("Setting up Main Window")
 
 
