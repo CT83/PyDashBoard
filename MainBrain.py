@@ -1,9 +1,10 @@
 from threading import Thread
 
-from BusinessLogic.Test import Test
 from Commons.Constants import *
-from Communication.Communicator import Communicator, doStuff
+from Communication.Communicator import Communicator
 from GUI.PyGenerators import *
+from Tasks.Tasks import initiateBackgroundTasks
+from Test.Test import Test
 
 display(application_name + " Initialised...")
 display("Generating UI...")
@@ -37,7 +38,7 @@ ui.top_PoleTest_T0[0][0].setText("T0")
 ui.top_PoleTest_T1[0][0].setText("T1")
 ui.top_PoleTest_T2[0][0].setText("T2")
 
-thread = Thread(target=doStuff, args=(ui,))
+thread = Thread(target=initiateBackgroundTasks, args=(ui,))
 thread.daemon = True
 thread.start()
 
