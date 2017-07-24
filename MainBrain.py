@@ -1,3 +1,5 @@
+from threading import Thread
+
 from BusinessLogic.Test import Test
 from Commons.Constants import *
 from Communication.Communicator import Communicator, doStuff
@@ -35,7 +37,7 @@ ui.top_PoleTest_T0[0][0].setText("T0")
 ui.top_PoleTest_T1[0][0].setText("T1")
 ui.top_PoleTest_T2[0][0].setText("T2")
 
-thread = threading.Thread(target=doStuff, args=(ui,))
+thread = Thread(target=doStuff, args=(ui,))
 thread.daemon = True
 thread.start()
 

@@ -30,5 +30,5 @@ class Communicator:
 
 def doStuff(self):
     self.top_PoleTest_T2[0][0].setText("Set by thread")
-    for i in range(100000):
+    for i in range(100000000):
         print i
