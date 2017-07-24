@@ -1,5 +1,6 @@
 from BusinessLogic.Test import Test
 from Commons.Constants import *
+from Communication.Communicator import Communicator, doStuff
 from GUI.PyGenerators import *
 
 display(application_name + " Initialised...")
@@ -18,12 +19,13 @@ generate_new_test(magneticTest)
 generate_new_test(testTest)
 generate_new_test(test2Test)
 
-
 # generate_poles(thermalTest,3)
 # generate_poles(thermalTest,4)
 
 print("Number of Poles=" + str(ui.PolesVerticalLayout.count() - ITEMS_EXCEPT_POLES))
 # print("Pole"+str(ui.PolesVerticalLayout)
+comm = Communicator()
+comm.sendDataRequest()
 
 ui.top_PoleTestLegend[0][0].setText(thermalTest.test_name + " Test")
 ui.top_PoleTestLegend[0][1].setText(magneticTest.test_name + " Test")
@@ -32,4 +34,10 @@ ui.top_PoleTestLegend[0][3].setText(test2Test.test_name + " Test")
 ui.top_PoleTest_T0[0][0].setText("T0")
 ui.top_PoleTest_T1[0][0].setText("T1")
 ui.top_PoleTest_T2[0][0].setText("T2")
+
+thread = threading.Thread(target=doStuff, args=(ui,))
+thread.daemon = True
+thread.start()
+
 drawMainWindow()
+print("Done Drawing MainWindow")

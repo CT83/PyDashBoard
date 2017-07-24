@@ -33,4 +33,4 @@ def drawMainWindow():
 
 def createGUI():
     MainWindow.show()
-    sys.exit(app.exec_())
+    app.exec_()
