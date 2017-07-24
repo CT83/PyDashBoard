@@ -185,6 +185,15 @@ class UIMainWindow(object):
         self.individualPole.addWidget(self.pole_line)
         self.PolesVerticalLayout.addLayout(self.individualPole)
 
+        self.pole_label_3.setStyleSheet(
+            "QLabel { background-color : black; color : white; qproperty-alignment: AlignCenter;}")
+        self.pole_label_2.setStyleSheet(
+            "QLabel { background-color : black; color : white; qproperty-alignment: AlignCenter;}")
+        self.pole_label_4.setStyleSheet(
+            "QLabel { background-color : black; color : white; qproperty-alignment: AlignCenter;}")
+        self.pole_label.setStyleSheet(
+            "QLabel { background-color : black; color : green; qproperty-alignment: AlignCenter;}")
+
         self.pole_label.setText(_translate("MainWindow", "Pole_" + str(index), None))
         self.pole_label_3.setText(_translate("MainWindow", test_self.pole_list_list[index][0], None))
         self.pole_label_2.setText(_translate("MainWindow", test_self.pole_list_list[index][1], None))
