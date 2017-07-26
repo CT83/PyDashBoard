@@ -1,7 +1,6 @@
 from threading import Thread
 
 from Commons.Constants import *
-from Communication.Communicator import Communicator
 from GUI.PyGenerators import *
 from Tasks.Tasks import initiateBackgroundTasks
 from Test.Test import Test
@@ -27,8 +26,7 @@ generate_new_test(test2Test)
 
 print("Number of Poles=" + str(ui.PolesVerticalLayout.count() - ITEMS_EXCEPT_POLES))
 # print("Pole"+str(ui.PolesVerticalLayout)
-comm = Communicator()
-comm.sendDataRequest()
+
 
 ui.top_PoleTestLegend[0][0].setText(thermalTest.test_name + " Test")
 ui.top_PoleTestLegend[0][1].setText(magneticTest.test_name + " Test")
