@@ -1,3 +1,5 @@
+from threading import Thread
+
 from Communication.Communicator import Communicator
 from Communication.Parser import writeCSVtoVariables
 from Settings import Settings
@@ -14,10 +16,11 @@ def initiateBackgroundTasks(self):
     self.top_PoleTest_T2[0][0].setText("Set by thread")
     self.top_PoleTest_T2[0][2].setText("Set by thread")
 
-    print("Sending Recieved Data to be Parsed")
-    comm = Communicator(Settings.SERVER_IP, Settings.SERVER_PORT)
-    response = comm.sendDataRequest()
+    commServer = Communicator(Settings.SERVER_IP, Settings.SERVER_PORT)
+    s = Thread(target=Communicator.startServer, args=(commServer,))
+    s.daemon = True
+    s.start()
+
+    commClient = Communicator(Settings.SERVER_IP, Settings.CLIENT_PORT)
+    response = commClient.sendDataRequest()
     writeCSVtoVariables(response)
-
-
-    # writeCSVtoVariables() needs to be written correctly
