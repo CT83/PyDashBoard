@@ -28,6 +28,7 @@ numberOfPoles = 0
 
 
 class UIMainWindow(object):
+
     def definitions(self):
         self.top_PoleTestLegend = [[QtGui.QLabel(self.centralwidget) for i in range(MAX_SIZE - 2)] for j in
                                    range(MAX_SIZE)]
@@ -37,6 +38,7 @@ class UIMainWindow(object):
                                 range(MAX_SIZE)]
         self.top_PoleTest_T2 = [[QtGui.QLabel(self.centralwidget) for i in range(MAX_SIZE - 2)] for j in
                                 range(MAX_SIZE)]
+
 
     def addNewTestPole(self, test_self, idx, idx2):
         index = int(idx2)
@@ -49,10 +51,10 @@ class UIMainWindow(object):
         print str(idx) + " " + str(index)
         self.top_PoleTestLegend[idx][index].setFont(font)
         self.top_PoleTestLegend[idx][index].setStyleSheet(_fromUtf8("QLabel {\n"
-                                                      "qproperty-alignment: AlignCenter;\n"
-                                                      "color:white;\n"
-                                                      "}\n"
-                                                      ""))
+                                                                    "qproperty-alignment: AlignCenter;\n"
+                                                                    "color:white;\n"
+                                                                    "}\n"
+                                                                    ""))
         self.top_PoleTestLegend[idx][index].setObjectName(_fromUtf8("ip_3"))
         self.individualTestPerPole.addWidget(self.top_PoleTestLegend[idx][index])
 
@@ -61,10 +63,10 @@ class UIMainWindow(object):
         font.setPointSize(11)
         self.top_PoleTest_T0[idx][index].setFont(font)
         self.top_PoleTest_T0[idx][index].setStyleSheet(_fromUtf8("QLabel {\n"
-                                          "qproperty-alignment: AlignCenter;\n"
-                                          "color:white;\n"
-                                          "}\n"
-                                          ""))
+                                                                 "qproperty-alignment: AlignCenter;\n"
+                                                                 "color:white;\n"
+                                                                 "}\n"
+                                                                 ""))
         self.top_PoleTest_T0[idx][index].setObjectName(_fromUtf8("ip_2"))
         self.individualTestPerPole.addWidget(self.top_PoleTest_T0[idx][index])
         self.top_PoleTest_T1[idx][index] = QtGui.QLabel(self.centralwidget)
@@ -72,10 +74,10 @@ class UIMainWindow(object):
         font.setPointSize(11)
         self.top_PoleTest_T1[idx][index].setFont(font)
         self.top_PoleTest_T1[idx][index].setStyleSheet(_fromUtf8("QLabel {\n"
-                                          "qproperty-alignment: AlignCenter;\n"
-                                          "color:white;\n"
-                                          "}\n"
-                                          ""))
+                                                                 "qproperty-alignment: AlignCenter;\n"
+                                                                 "color:white;\n"
+                                                                 "}\n"
+                                                                 ""))
         self.top_PoleTest_T1[idx][index].setObjectName(_fromUtf8("ip_1"))
         self.individualTestPerPole.addWidget(self.top_PoleTest_T1[idx][index])
         self.top_PoleTest_T2[idx][index] = QtGui.QLabel(self.centralwidget)
@@ -85,10 +87,10 @@ class UIMainWindow(object):
         font.setWeight(50)
         self.top_PoleTest_T2[idx][index].setFont(font)
         self.top_PoleTest_T2[idx][index].setStyleSheet(_fromUtf8("QLabel {\n"
-                                          "qproperty-alignment: AlignCenter;\n"
-                                          "color:white;\n"
-                                          "}\n"
-                                          ""))
+                                                                 "qproperty-alignment: AlignCenter;\n"
+                                                                 "color:white;\n"
+                                                                 "}\n"
+                                                                 ""))
         self.top_PoleTest_T2[idx][index].setObjectName(_fromUtf8("ip_0"))
         self.individualTestPerPole.addWidget(self.top_PoleTest_T2[idx][index])
         self.ip_lineBottom = QtGui.QFrame(self.centralwidget)
@@ -224,7 +226,6 @@ class UIMainWindow(object):
 
         # Add new TestPoles Here.
         global testIndex
-
         for i in xrange(numberOfPoles):
             self.addNewTestPole(test_self, i, testIndex)
         testIndex = testIndex + 1
@@ -424,8 +425,24 @@ class UIMainWindow(object):
         self.line_2.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_2.setObjectName(_fromUtf8("line_2"))
         self.gridLayout.addWidget(self.line_2, 0, 1, 1, 1)
-        MainWindow.setCentralWidget(self.centralwidget)
 
+        self.mini_log = QtGui.QTextEdit(self.centralwidget)
+        self.mini_log.setMaximumSize(QtCore.QSize(16777215, 30))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Consolas"))
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.mini_log.setFont(font)
+        self.mini_log.setStyleSheet(_fromUtf8("QLabel {\n"
+                                              "qproperty-alignment: AlignLeft;\n"
+                                              "}\n"
+                                              ""))
+        self.mini_log.setReadOnly(True)
+        self.gridLayout.addWidget(self.mini_log, 1, 2, 1, 1)
+        self.mini_log.setText("Test Text")
+
+        MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -437,5 +454,4 @@ class UIMainWindow(object):
 class MainWindow(QtGui.QMainWindow, UIMainWindow):
     def __init__(self, parent=None, f=QtCore.Qt.WindowFlags()):
         QtGui.QMainWindow.__init__(self, parent, f)
-
         self.setupUi(self)

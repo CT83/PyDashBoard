@@ -1,6 +1,7 @@
 from threading import Thread
 
 from Commons.Constants import *
+from Commons.Methods import display_mini
 from GUI.PyGenerators import *
 from Tasks.Tasks import initiateBackgroundTasks
 from Test.Test import Test
@@ -35,7 +36,7 @@ ui.top_PoleTestLegend[0][3].setText(test2Test.test_name + " Test")
 ui.top_PoleTest_T0[0][0].setText("T0")
 ui.top_PoleTest_T1[0][0].setText("T1")
 ui.top_PoleTest_T2[0][0].setText("T2")
-
+display_mini(ui, "Starting...")
 thread = Thread(target=initiateBackgroundTasks, args=(ui,))
 thread.daemon = True
 thread.start()
