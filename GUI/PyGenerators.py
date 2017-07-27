@@ -20,7 +20,7 @@ def generate_new_test(test_self):
 
 
 def generate_poles(test_self, index):
-    display("Generating Poles respectively for:" + str(test_self.pole_list_list))
+    display("Generating Poles respectively for:")
     ui.addNewPole(test_self, index)
     MainWindow.show()
 
