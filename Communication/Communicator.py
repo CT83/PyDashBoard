@@ -11,9 +11,7 @@ class Communicator:
     def sendDataRequest(self):
         print("Sending Data Request to " + self.Server_Ip + " on Port " + str(self.port))
         import socket
-        # server = 'pythonprogramming.net'
         result = ""
-        # port = 80
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         print(s)
         server_ip = socket.gethostbyname(self.Server_Ip)
@@ -28,7 +26,7 @@ class Communicator:
             print(result)
         except socket.error:
             print("Socket Error Exception Thrown!")
-        print("Request Sent")
+        print("Response : " + result)
         return result
 
     def startServer(self):

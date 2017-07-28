@@ -7,7 +7,7 @@ from StringIO import StringIO
 # TEST_NO[POLE_NO]]
 #######################
 
-def writeCSVtoVariables(csv_msg):
+def parse_and_write_to_vars(csv_msg):
     buffer = StringIO(csv_msg)
     data = list(csv.reader(buffer))
 
