@@ -1,5 +1,8 @@
 import ast
 
+red_background = "QLabel { background-color : red; color : white;}"
+green_background = "QLabel { background-color : yellow; color : white;}"
+orange_background = "QLabel { background-color : pink; color : white;}"
 
 def parse_and_write_to_vars(self, resp):
     print("UnParsed String:" + str(resp))
@@ -11,10 +14,23 @@ def parse_and_write_to_vars(self, resp):
             print("Writing to:" + str(test) + ", " + str(pole))
             r_index = r_index + 1
             self.top_PoleTest_T0[test][pole].setText(resp[r_index])
+            self.top_PoleTest_T0[test][pole].setStyleSheet(choice_back(resp[r_index]))
+
             r_index = r_index + 1
             self.top_PoleTest_T1[test][pole].setText(resp[r_index])
+            self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
+
             r_index = r_index + 1
             self.top_PoleTest_T2[test][pole].setText(resp[r_index])
-
+            self.top_PoleTest_T2[test][pole].setStyleSheet(choice_back(resp[r_index]))
 
     print("Done writing CSV to Variables.")
+
+
+def choice_back(i):
+    i = int(i)
+    if (i % 2 == 0):
+        ch = red_background
+    else:
+        ch = green_background
+    return ch

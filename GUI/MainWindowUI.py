@@ -113,7 +113,6 @@ class UIMainWindow(object):
         self.top_PoleTest_T2[test_i][pole_i].setStyleSheet(
             "QLabel { background-color : orange; color : black; qproperty-alignment: AlignCenter;}")
 
-
     def addNewPole(self, test_self, index):
         global pole_ctr
         pole_ctr = pole_ctr + 1
@@ -454,3 +453,4 @@ class MainWindow(QtGui.QMainWindow, UIMainWindow):
     def __init__(self, parent=None, f=QtCore.Qt.WindowFlags()):
         QtGui.QMainWindow.__init__(self, parent, f)
         self.setupUi(self)
+
