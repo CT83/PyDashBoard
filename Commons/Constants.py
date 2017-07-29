@@ -3,7 +3,7 @@ application_developer = "Rohan Sawant"
 application_version_type = "Alpha"
 application_version_num = "0.0.1"
 
-MAX_SIZE = 10
+MAX_SIZE = 50
 
 # Thermal Test
 thermalTestName = "Thermal"
