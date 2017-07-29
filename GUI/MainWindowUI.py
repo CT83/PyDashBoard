@@ -1,9 +1,5 @@
-# This program creates an EmptyMainWindow and then adds
-# a Sample Test box in it
-
 from PySide import QtCore, QtGui
 
-# noinspection PyUnresolvedReferences
 from Commons.Constants import MAX_SIZE
 from Commons.Methods import *
 
@@ -78,6 +74,7 @@ class UIMainWindow(object):
                                                                      ""))
         self.top_PoleTest_T1[test_i][pole_i].setObjectName(_fromUtf8("ip_1"))
         self.individualTestPerPole.addWidget(self.top_PoleTest_T1[test_i][pole_i])
+        self.setupSlot()
         self.top_PoleTest_T2[test_i][pole_i] = QtGui.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -96,6 +93,7 @@ class UIMainWindow(object):
         self.ip_lineBottom.setFrameShape(QtGui.QFrame.HLine)
         self.ip_lineBottom.setFrameShadow(QtGui.QFrame.Sunken)
         self.ip_lineBottom.setObjectName(_fromUtf8("ip_lineBottom"))
+
         self.individualTestPerPole.addWidget(self.ip_lineBottom)
         self.individualTestPerPole.addWidget(self.ip_lineBottom)
         self.individualTestPerPole.addWidget(self.ip_lineBottom)
@@ -112,6 +110,7 @@ class UIMainWindow(object):
         self.top_PoleTest_T2[test_i][pole_i].setText(_translate("MainWindow", "In Progress", None))
         self.top_PoleTest_T2[test_i][pole_i].setStyleSheet(
             "QLabel { background-color : orange; color : black; qproperty-alignment: AlignCenter;}")
+
 
     def addNewPole(self, test_self, index):
         global pole_ctr
@@ -448,9 +447,24 @@ class UIMainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.StartButton.setText(_translate("MainWindow", "Start", None))
 
+    def setupSlot(self):
+        downloader = DownloadThread()
+        downloader.data_downloaded.connect(self.on_data_ready)
+        downloader.run()
+
+    def on_data_ready(self, data):
+        print (data + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        self.top_PoleTest_T1[0][0].setText("SSSSSSSSSSS")
+        self.top_PoleTest_T2[2][2].setText("SSSSSSSSSSS")
 
 class MainWindow(QtGui.QMainWindow, UIMainWindow):
     def __init__(self, parent=None, f=QtCore.Qt.WindowFlags()):
         QtGui.QMainWindow.__init__(self, parent, f)
         self.setupUi(self)
 
+
+class DownloadThread(QtCore.QObject):
+    data_downloaded = QtCore.Signal(object)
+
+    def run(self):
+        self.data_downloaded.emit("dataadsd")
