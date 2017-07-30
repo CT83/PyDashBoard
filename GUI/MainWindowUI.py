@@ -1,7 +1,16 @@
+import ast
+import sys
+import threading
+import time
+
 from PySide import QtCore, QtGui
 
 from Commons.Constants import MAX_SIZE
 from Commons.Methods import *
+from Communication.Communicator import Communicator
+from Communication.Parser import choice_back
+from Settings import Settings
+from Settings.Settings import import_settings
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -23,6 +32,27 @@ testIndex = 0
 test_ctr = 0
 pole_ctr = 0
 val_ctr = 0
+
+
+class DownloadThread(QtCore.QThread):
+    # this goes in Definitions
+    data_downloaded = QtCore.Signal(object)
+
+    def __init__(self):
+        QtCore.QThread.__init__(self)
+
+    def run(self):
+        # call parser and start client
+        import_settings("Settings.ct83")
+        print ("Connecting to")
+        print("Server IP  :" + Settings.SERVER_IP)
+        print("Server Port:" + Settings.CLIENT_PORT)
+        while 1:
+            commClient = Communicator(Settings.SERVER_IP, Settings.CLIENT_PORT)
+            response = commClient.sendDataRequest()
+            print(response)
+            self.data_downloaded.emit(response)
+            time.sleep(1)
 
 
 class UIMainWindow(object):
@@ -402,6 +432,7 @@ class UIMainWindow(object):
                                                  "}"))
         self.StartButton.setFlat(False)
         self.StartButton.setObjectName(_fromUtf8("StartButton"))
+        self.StartButton.clicked.connect(self.start_download)
         self.gridLayout.addWidget(self.StartButton, 1, 0, 1, 1)
         self.TestParentLayout = QtGui.QVBoxLayout()
         self.TestParentLayout.setObjectName(_fromUtf8("TestParentLayout"))
@@ -440,10 +471,41 @@ class UIMainWindow(object):
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
-      
+
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.StartButton.setText(_translate("MainWindow", "Start", None))
+
+    def start_download(self):
+        self.threads = []
+        t1 = DownloadThread()
+        t1.data_downloaded.connect(self.on_data_ready)  # what to do after getting signal
+        self.threads.append(t1)
+        t1.start()
+
+    def on_data_ready(self, resp):  # this gets data from run method of thread
+        print("On Data Thread Name:" + threading.current_thread().name)
+        print("UnParsed String:" + str(resp))
+        resp = ast.literal_eval(resp)
+        print("Parsed String:" + str(resp))
+        r_index = 0
+        global RESP
+        RESP = resp
+        for test in xrange(0, 4):
+            for pole in xrange(0, 4):
+                print("Writing to:" + str(test) + ", " + str(pole))
+                r_index = r_index + 1
+                self.top_PoleTest_T0[test][pole].setText(resp[r_index])
+                self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
+
+                r_index = r_index + 1
+                self.top_PoleTest_T1[test][pole].setText(resp[r_index])
+                self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
+
+                r_index = r_index + 1
+                self.top_PoleTest_T2[test][pole].setText(resp[r_index])
+                self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
+
 
 
 class MainWindow(QtGui.QMainWindow, UIMainWindow):
@@ -451,3 +513,15 @@ class MainWindow(QtGui.QMainWindow, UIMainWindow):
         QtGui.QMainWindow.__init__(self, parent, f)
         self.setupUi(self)
 
+
+ui = UIMainWindow()
+app = QtGui.QApplication(sys.argv)
+MainWindow = QtGui.QMainWindow()
+ui.setupUi(MainWindow)
+ui.definitions()
+display("Setting up Main Window")
+
+
+def createGUI():
+    MainWindow.show()
+    sys.exit(app.exec_())

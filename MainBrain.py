@@ -2,6 +2,7 @@ from threading import Thread
 
 from Commons.Constants import *
 from Commons.Methods import display_mini
+from GUI.MainWindowUI import createGUI
 from GUI.PyGenerators import *
 from Tasks.Tasks import initiateBackgroundTasks
 from Test.Test import Test
@@ -35,9 +36,9 @@ def main():
 
 
     ui.top_PoleTestLegend[0][0].setText(thermalTest.test_name + " Test")
-    ui.top_PoleTestLegend[0][1].setText(magneticTest.test_name + " Test")
-    ui.top_PoleTestLegend[0][2].setText(testTest.test_name + " Test")
-    ui.top_PoleTestLegend[0][3].setText(test2Test.test_name + " Test")
+    ui.top_PoleTestLegend[1][0].setText(magneticTest.test_name + " Test")
+    ui.top_PoleTestLegend[2][0].setText(testTest.test_name + " Test")
+    ui.top_PoleTestLegend[3][0].setText(test2Test.test_name + " Test")
 
     # first value is x axis and second is y
     ui.top_PoleTest_T0[0][0].setText("T0_00")
@@ -50,7 +51,7 @@ def main():
     display_mini(ui, "Starting...")
     thread = Thread(target=initiateBackgroundTasks, args=(ui,))
     thread.daemon = True
-    thread.start()
+    # thread.start()
     createGUI()
 
 

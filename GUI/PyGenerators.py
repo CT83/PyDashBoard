@@ -1,16 +1,5 @@
-import sys
-
-from PySide import QtGui
-
 from Commons.Methods import display
-from GUI.MainWindowUI import UIMainWindow
-
-ui = UIMainWindow()
-app = QtGui.QApplication(sys.argv)
-MainWindow = QtGui.QMainWindow()
-ui.setupUi(MainWindow)
-ui.definitions()
-display("Setting up Main Window")
+from GUI.MainWindowUI import ui, MainWindow
 
 
 def generate_new_test(test_self):
@@ -24,7 +13,3 @@ def generate_poles(test_self, index):
     ui.addNewPole(test_self, index)
     MainWindow.show()
 
-
-def createGUI():
-    MainWindow.show()
-    sys.exit(app.exec_())

@@ -45,9 +45,9 @@ def initiateBackgroundTasks(ui):
     # s.daemon = True
     # s.start()
 
-    while 1:
-        commClient = Communicator(Settings.SERVER_IP, Settings.CLIENT_PORT)
-        response = commClient.sendDataRequest()
-        parse_and_write_to_vars(ui, response)
-        QtGui.QApplication.processEvents()
-        time.sleep(1)
+    # while 1:
+    commClient = Communicator(Settings.SERVER_IP, Settings.CLIENT_PORT)
+    response = commClient.sendDataRequest()
+    parse_and_write_to_vars(ui, response)
+    QtGui.QApplication.processEvents()
+    time.sleep(1)
