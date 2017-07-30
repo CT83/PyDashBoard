@@ -25,12 +25,6 @@ def generate_poles(test_self, index):
     MainWindow.show()
 
 
-def drawMainWindow():
-    print ("Drawing MainWindow")
-    # createEmptyMainWindow()
-    createGUI()
-
-
 def createGUI():
     MainWindow.show()
-    app.exec_()
+    sys.exit(app.exec_())

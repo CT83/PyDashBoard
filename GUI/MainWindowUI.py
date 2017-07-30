@@ -226,7 +226,6 @@ class UIMainWindow(object):
             self.addNewTestPole(test_self, testIndex, i)
         testIndex = testIndex + 1
         self.TestsHorizontalLayout.addLayout(self.TestVerticalLayout)
-        self.setupSlot()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -441,23 +440,10 @@ class UIMainWindow(object):
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+      
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.StartButton.setText(_translate("MainWindow", "Start", None))
-
-    def setupSlot(self):
-        downloader = UIThread()
-        downloader.data_downloaded.connect(self.on_data_ready)
-        downloader.run()
-
-    def on_data_ready(self, data):
-        print (data + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        self.top_PoleTest_T1[0][0].setText("SSSSSSSSSSS")
-        self.top_PoleTest_T2[2][2].setText("SSSSSSSSSSS")
-        self.top_PoleTest_T2[2][3].setStyleSheet(
-            "QLabel { background-color : orange; color : black; qproperty-alignment: AlignCenter;}")
 
 
 class MainWindow(QtGui.QMainWindow, UIMainWindow):
@@ -465,12 +451,3 @@ class MainWindow(QtGui.QMainWindow, UIMainWindow):
         QtGui.QMainWindow.__init__(self, parent, f)
         self.setupUi(self)
 
-
-class UIThread(QtCore.QThread):
-    data_downloaded = QtCore.Signal(object)
-
-    def __init__(self):
-        QtCore.QThread.__init__(self)
-
-    def run(self):
-        self.data_downloaded.emit("dataadsd")
