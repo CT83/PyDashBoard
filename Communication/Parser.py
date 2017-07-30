@@ -1,5 +1,7 @@
 import ast
 
+from GUI.MainWindowUI import UIThread
+
 red_background = "QLabel { background-color : red; color : white;}"
 green_background = "QLabel { background-color : yellow; color : white;}"
 orange_background = "QLabel { background-color : pink; color : white;}"
@@ -14,6 +16,8 @@ def parse_and_write_to_vars(self, resp):
         for pole in xrange(0, 4):
             print("Writing to:" + str(test) + ", " + str(pole))
             r_index = r_index + 1
+            obj = UIThread()
+            obj.run()
             # self.top_PoleTest_T0[test][pole].setText(resp[r_index])
             # self.top_PoleTest_T0[test][pole].setStyleSheet(choice_back(resp[r_index]))
 

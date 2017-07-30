@@ -74,7 +74,7 @@ class UIMainWindow(object):
                                                                      ""))
         self.top_PoleTest_T1[test_i][pole_i].setObjectName(_fromUtf8("ip_1"))
         self.individualTestPerPole.addWidget(self.top_PoleTest_T1[test_i][pole_i])
-        self.setupSlot()
+
         self.top_PoleTest_T2[test_i][pole_i] = QtGui.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -110,7 +110,6 @@ class UIMainWindow(object):
         self.top_PoleTest_T2[test_i][pole_i].setText(_translate("MainWindow", "In Progress", None))
         self.top_PoleTest_T2[test_i][pole_i].setStyleSheet(
             "QLabel { background-color : orange; color : black; qproperty-alignment: AlignCenter;}")
-
 
     def addNewPole(self, test_self, index):
         global pole_ctr
@@ -227,6 +226,7 @@ class UIMainWindow(object):
             self.addNewTestPole(test_self, testIndex, i)
         testIndex = testIndex + 1
         self.TestsHorizontalLayout.addLayout(self.TestVerticalLayout)
+        self.setupSlot()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -448,7 +448,7 @@ class UIMainWindow(object):
         self.StartButton.setText(_translate("MainWindow", "Start", None))
 
     def setupSlot(self):
-        downloader = DownloadThread()
+        downloader = UIThread()
         downloader.data_downloaded.connect(self.on_data_ready)
         downloader.run()
 
@@ -456,6 +456,9 @@ class UIMainWindow(object):
         print (data + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         self.top_PoleTest_T1[0][0].setText("SSSSSSSSSSS")
         self.top_PoleTest_T2[2][2].setText("SSSSSSSSSSS")
+        self.top_PoleTest_T2[2][3].setStyleSheet(
+            "QLabel { background-color : orange; color : black; qproperty-alignment: AlignCenter;}")
+
 
 class MainWindow(QtGui.QMainWindow, UIMainWindow):
     def __init__(self, parent=None, f=QtCore.Qt.WindowFlags()):
@@ -463,8 +466,11 @@ class MainWindow(QtGui.QMainWindow, UIMainWindow):
         self.setupUi(self)
 
 
-class DownloadThread(QtCore.QObject):
+class UIThread(QtCore.QThread):
     data_downloaded = QtCore.Signal(object)
+
+    def __init__(self):
+        QtCore.QThread.__init__(self)
 
     def run(self):
         self.data_downloaded.emit("dataadsd")
