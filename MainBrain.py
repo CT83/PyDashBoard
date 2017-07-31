@@ -1,10 +1,6 @@
-from threading import Thread
-
 from Commons.Constants import *
-from Commons.Methods import display_mini
 from GUI.MainWindowUI import createGUI
 from GUI.PyGenerators import *
-from Tasks.Tasks import initiateBackgroundTasks
 from Test.Test import Test
 
 
@@ -28,11 +24,7 @@ def main():
     generate_new_test(testTest)
     generate_new_test(test2Test)
 
-    # generate_poles(thermalTest,3)
-    # generate_poles(thermalTest,4)
-
     print("Number of Poles=" + str(ui.PolesVerticalLayout.count() - ITEMS_EXCEPT_POLES))
-    # print("Pole"+str(ui.PolesVerticalLayout)
 
 
     ui.top_PoleTestLegend[0][0].setText(thermalTest.test_name + " Test")
@@ -48,11 +40,6 @@ def main():
     ui.top_PoleTest_T0[1][0].setText("T0_10")
     ui.top_PoleTest_T1[0][1].setText("T1_01")
     ui.top_PoleTest_T2[1][0].setText("T2_10")
-    display_mini(ui, "Starting...")
-    thread = Thread(target=initiateBackgroundTasks, args=(ui,))
-    thread.daemon = True
-    # thread.start()
     createGUI()
-
 
 main()
