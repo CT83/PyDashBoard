@@ -42,16 +42,15 @@ class RecieveThread(QtCore.QThread):
         QtCore.QThread.__init__(self)
 
     def run(self):
-        # call parser and start client
         import_settings("Settings.ct83")
         print ("Connecting to")
         print("Server IP  :" + Settings.SERVER_IP)
         print("Server Port:" + Settings.CLIENT_PORT)
+        commClient = Communicator(Settings.SERVER_IP, Settings.CLIENT_PORT)
         while 1:
-            commClient = Communicator(Settings.SERVER_IP, Settings.CLIENT_PORT)
             response = commClient.sendDataRequest()
-            print(response)
             self.start_button_clicked.emit(response)
+            QtCore.QCoreApplication.processEvents()
             time.sleep(1)
 
 
@@ -442,8 +441,6 @@ class UIMainWindow(object):
         self.gridLayout.addLayout(self.TestParentLayout, 0, 2, 1, 1)
         self.PolesVerticalLayout = QtGui.QVBoxLayout()
         self.PolesVerticalLayout.setObjectName(_fromUtf8("PolesVerticalLayout"))
-        # spacerItem = QtGui.QSpacerItem(20, 38, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
-        # self.PolesVerticalLayout.addItem(spacerItem)
         self.gridLayout.addLayout(self.PolesVerticalLayout, 0, 0, 1, 1)
         self.line_2 = QtGui.QFrame(self.centralwidget)
         self.line_2.setMaximumSize(QtCore.QSize(1, 16777215))
@@ -467,7 +464,7 @@ class UIMainWindow(object):
                                               ""))
         self.mini_log.setReadOnly(True)
         self.gridLayout.addWidget(self.mini_log, 1, 2, 1, 1)
-        self.mini_log.setText("Test Text")
+        self.mini_log.setText("...")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
@@ -479,33 +476,31 @@ class UIMainWindow(object):
     def start_recieving(self):
         self.threads = []
         t1 = RecieveThread()
-        t1.start_button_clicked.connect(self.do_update_gui)  # what to do after getting signal
+        t1.start_button_clicked.connect(self.do_update_gui)
         self.threads.append(t1)
         t1.start()
 
+
     def do_update_gui(self, resp):  # this gets data from run method of thread
-        print("On Data Thread Name:" + threading.current_thread().name)
-        print("UnParsed String:" + str(resp))
-        resp = ast.literal_eval(resp)
-        print("Parsed String:" + str(resp))
-        r_index = 0
-        global RESP
-        RESP = resp
-        for test in xrange(0, 4):
-            for pole in xrange(0, 4):
-                print("Writing to:" + str(test) + ", " + str(pole))
-                r_index = r_index + 1
-                self.top_PoleTest_T0[test][pole].setText(resp[r_index])
-                self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
+        print("Do_Update_GUI Thread Name:" + threading.current_thread().name)
+        try:
+            resp = ast.literal_eval(resp)
+            r_index = 0
+            for test in xrange(0, 4):
+                for pole in xrange(0, 4):
+                    r_index = r_index + 1
+                    self.top_PoleTest_T0[test][pole].setText(resp[r_index])
+                    self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
 
-                r_index = r_index + 1
-                self.top_PoleTest_T1[test][pole].setText(resp[r_index])
-                self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
+                    r_index = r_index + 1
+                    self.top_PoleTest_T1[test][pole].setText(resp[r_index])
+                    self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
 
-                r_index = r_index + 1
-                self.top_PoleTest_T2[test][pole].setText(resp[r_index])
-                self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
-
+                    r_index = r_index + 1
+                    self.top_PoleTest_T2[test][pole].setText(resp[r_index])
+                    self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
+        except Exception, a:
+            print(a)
 
 class MainWindow(QtGui.QMainWindow, UIMainWindow):
     def __init__(self, parent=None, f=QtCore.Qt.WindowFlags()):
@@ -523,4 +518,6 @@ ui.definitions()
 
 def createGUI():
     MainWindow.show()
+    ui.start_recieving()
     sys.exit(app.exec_())
+
