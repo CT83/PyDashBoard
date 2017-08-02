@@ -1,7 +1,34 @@
 import socket
 import threading
+import time
 
 from Commons.Constants import TCP_MESSAGE
+from Settings import Settings
+from Settings.Settings import import_settings
+
+RESPONSE = []
+
+
+def getRESPONSE():
+    return RESPONSE
+
+
+class ClientThread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        import_settings("Settings.ct83")
+        print ("Started Separate Thread, Connecting to")
+        print("Server IP  :" + Settings.SERVER_IP)
+        print("Server Port:" + Settings.CLIENT_PORT)
+        commClient = Communicator(Settings.SERVER_IP, Settings.CLIENT_PORT)
+        while 1:
+            print("CLIENT Thread Name:" + threading.current_thread().name)
+            global RESPONSE
+            RESPONSE = commClient.sendDataRequest()
+            time.sleep(1)
+
 
 
 class Communicator:
@@ -11,7 +38,6 @@ class Communicator:
 
     def sendDataRequest(self):
         print("Sending Data Request to " + self.Server_Ip + " on Port " + str(self.port))
-        print("Network Thread Name:" + threading.current_thread().name)
         import socket
         result = ""
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -24,7 +50,6 @@ class Communicator:
             result = s.recv(4096)
         except socket.error:
             print("Socket Error Exception Thrown!")
-        print ("Done!")
         return result
 
     def startServer(self):

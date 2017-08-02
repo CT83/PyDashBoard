@@ -4,13 +4,12 @@ import threading
 import time
 
 from PySide import QtCore, QtGui
+from PySide.QtGui import QApplication
 
 from Commons.Constants import MAX_SIZE
 from Commons.Methods import *
 from Commons.Methods import choice_back
-from Communication.Communicator import Communicator
-from Settings import Settings
-from Settings.Settings import import_settings
+from Communication.Communicator import ClientThread, getRESPONSE
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -35,22 +34,17 @@ val_ctr = 0
 
 
 class RecieveThread(QtCore.QThread):
-    # this goes in Definitions
     start_button_clicked = QtCore.Signal(object)
 
     def __init__(self):
         QtCore.QThread.__init__(self)
 
     def run(self):
-        import_settings("Settings.ct83")
-        print ("Connecting to")
-        print("Server IP  :" + Settings.SERVER_IP)
-        print("Server Port:" + Settings.CLIENT_PORT)
-        commClient = Communicator(Settings.SERVER_IP, Settings.CLIENT_PORT)
+        client_thread = ClientThread()
+        client_thread.start()
         while 1:
-            response = commClient.sendDataRequest()
-            self.start_button_clicked.emit(response)
-            QtCore.QCoreApplication.processEvents()
+            self.start_button_clicked.emit(getRESPONSE())
+            QApplication.processEvents()
             time.sleep(1)
 
 
@@ -480,7 +474,6 @@ class UIMainWindow(object):
         self.threads.append(t1)
         t1.start()
 
-
     def do_update_gui(self, resp):  # this gets data from run method of thread
         print("Do_Update_GUI Thread Name:" + threading.current_thread().name)
         try:
@@ -500,7 +493,9 @@ class UIMainWindow(object):
                     self.top_PoleTest_T2[test][pole].setText(resp[r_index])
                     self.top_PoleTest_T1[test][pole].setStyleSheet(choice_back(resp[r_index]))
         except Exception, a:
-            print(a)
+            print("Exception at do_update_gui:" + str(a))
+            print("Malformed String:" + str(resp))
+
 
 class MainWindow(QtGui.QMainWindow, UIMainWindow):
     def __init__(self, parent=None, f=QtCore.Qt.WindowFlags()):
@@ -520,4 +515,3 @@ def createGUI():
     MainWindow.show()
     ui.start_recieving()
     sys.exit(app.exec_())
-
