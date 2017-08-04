@@ -20,5 +20,5 @@ A TCP connection will be added to a Raspberry Pi via an Ethernet cable this will
 <br><br>
 <b>Tools Used:</b><br>
 1.QtDesigner<br> 
-2.JetBrainsPyCharm
+2.JetBrains PyCharm
 </html>
