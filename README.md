@@ -2,6 +2,7 @@
 <html><br>
 <b>Introductin</b>
 This is a Python application to convert the inputs given by TCP/IP Protcol to process able data and display it on a Desktop Monitor driven by a Raspberry Pi.
+15 July 2017 - 7 Aug 2017 (2 Hours/Day)
 <br><br>
 <b>Vision:</b>:
 <br>
@@ -21,4 +22,11 @@ A TCP connection will be added to a Raspberry Pi via an Ethernet cable this will
 <b>Tools Used:</b><br>
 1.QtDesigner<br> 
 2.JetBrains PyCharm
+
+
+<br></hr><br>
+<b>Conclusion</b>
+<br>The Project acquainted me with the basics of Python, helped understand Python's Integration with PySide and PyQt and similar UI Frameworks. It heightened my understanding of Git and GitHub as this was the first Project which used Git as a Primary Method of Version Control. This Project featured use of JetBrains PyCharm and QtDesigner.
+
+
 </html>
