@@ -1,8 +1,8 @@
 # PyDashBoard
 <br>
 <b>Introduction</b>
-This is a Python application to convert the inputs given by TCP/IP Protcol to process able data and display it on a Desktop Monitor driven by a Raspberry Pi.
-15 July 2017 - 7 Aug 2017 (2 Hours/Day)
+This is a Python application to convert the inputs given by TCP/IP Protcol to process able data and display it on a Desktop Monitor driven by a Raspberry Pi. It was developed for SCR Elektroniks in Dombivli.
+15 July 2017 - 7 Aug 2017 
 <br><br>
 <b>Vision</b>:
 <br>
